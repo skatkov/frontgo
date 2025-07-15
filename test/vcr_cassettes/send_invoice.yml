@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://demo-api.frontpayment.no/api/v1/connect/orders/invoice/create
+    body:
+      encoding: UTF-8
+      string: '{"products":{"0":{"name":"Hair Wash","productId":"VFDDF","quantity":"1","rate":51,"discount":0,"tax":"0","amount":51}},"orderSummary":{"subTotal":"51.00","totalTax":"0.00","totalDiscount":"0.00","grandTotal":"51.00"},"orderDate":"5
+        Dec, 2023","dueDateForPaymentLink":"1703040812","sendOrderBy":{"sms":false,"email":false,"invoice":true},"invoiceAsPaymentOption":false,"isCreditCheckAvailable":false,"customerDetails":{"type":"private","countryCode":"+47","msisdn":"46567468","email":"test@yopmail.com","customerUuid":"CSRT3672053467","name":"Kari
+        Nordmann","preferredLanguage":"en","personalNumber":null,"organizationId":null,"address":{"street":"Luramyrveien
+        65","zip":"4313","city":"Sandnes","country":"NO"}},"invoiceReferences":{"referenceNo":"Dhaka","customerReference":"3500","receiptNo":"Cumilla","customerNotes":"NO","tnc":"adfsl"},"invoiceInterval":0,"separateInvoices":true,"internalReferences":{"referenceNo":"Dhaka","notes":"3500"}}'
+    headers:
+      Authorization:
+      - "<AUTH>"
+      User-Agent:
+      - Faraday v2.13.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 417
+      message: Expectation Failed
+    headers:
+      server:
+      - nginx/1.24.0 (Ubuntu)
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      cache-control:
+      - no-cache, private
+      date:
+      - Tue, 15 Jul 2025 19:42:31 GMT
+      x-ratelimit-limit:
+      - '240'
+      x-ratelimit-remaining:
+      - '228'
+      access-control-allow-origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"status_code":417,"status_message":"Client Error","message":"payloadValidationErrors","is_error":true,"errors":["The
+        order date does not match the format d M, Y."]}'
+  recorded_at: Tue, 15 Jul 2025 19:42:31 GMT
+recorded_with: VCR 6.3.1

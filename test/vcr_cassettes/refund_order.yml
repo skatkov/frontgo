@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://demo-api.frontpayment.no/api/v1/connect/orders/refund/ODR123456789
+    body:
+      encoding: UTF-8
+      string: '{"type":"regular","grandTotal":55,"products":[{"id":451,"amount":30},{"id":452,"amount":25}],"source":null,"reference":null}'
+    headers:
+      Authorization:
+      - "<AUTH>"
+      User-Agent:
+      - Faraday v2.13.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      server:
+      - nginx/1.24.0 (Ubuntu)
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      cache-control:
+      - no-cache, private
+      date:
+      - Tue, 15 Jul 2025 19:42:30 GMT
+      x-ratelimit-limit:
+      - '240'
+      x-ratelimit-remaining:
+      - '231'
+      access-control-allow-origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"status_code":404,"status_message":"Not Found","message":"orderNotFound","is_data":false,"data":null}'
+  recorded_at: Tue, 15 Jul 2025 19:42:30 GMT
+recorded_with: VCR 6.3.1
