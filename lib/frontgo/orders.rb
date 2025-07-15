@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Frontgo
-  # @see
-  # https://docs.frontpayment.no/books/fpgo-connect/chapter/order-management
+  # @see https://docs.frontpayment.no/books/fpgo-connect/chapter/order-management
   module Orders
     def create_session_for_one_time_payment_link(params)
       post "api/v1/connect/orders/regular/submit", params
