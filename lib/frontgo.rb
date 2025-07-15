@@ -4,6 +4,7 @@ require_relative "frontgo/version"
 require_relative "frontgo/connection"
 require_relative "frontgo/orders"
 require_relative "frontgo/reservations"
+require_relative "frontgo/subscription"
 
 
 module Frontgo
@@ -13,6 +14,7 @@ module Frontgo
     include Connection
     include Orders
     include Reservations
+    include Subscription
 
     def initialize(base_url, key:)
       @connection = Faraday.new(base_url) do |conn|
