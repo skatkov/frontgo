@@ -1,28 +1,35 @@
 # Frontgo
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/frontgo`. To experiment with that code, run `bin/console` for an interactive prompt.
+Thin Ruby client for [FrontPayment API](https://docs.frontpayment.no/).
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add to your Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```ruby
+gem 'frontgo'
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
+And then install
+`bundle install`
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+client = Frontgo::Client.new('https://api.frontpayment.no', key: 'your-api-key')
+
+# Create payment session
+client.create_session_for_one_time_payment_link({
+  products: [{ name: "Product", rate: 1000, tax: 25, amount: 1250 }],
+  orderSummary: { subTotal: 1000, totalTax: 250, grandTotal: 1250 },
+  customerDetails: { name: "John Doe", email: "john@example.com" },
+  submitPayment: { via: "visa", currency: "NOK" },
+  callback: { success: "https://example.com/success", failure: "https://example.com/failure" }
+})
+
+# Get order status
+client.get_order_status_by_uuid("ODR123456789")
+```
 
 ## Development
 
