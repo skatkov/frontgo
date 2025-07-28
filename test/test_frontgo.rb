@@ -8,9 +8,10 @@ class TestFrontgo < Minitest::Test
       response = client.create_session_for_one_time_payment_link({
           products: [
               {
-                  name: "Router",
+                  name: "Framework 13 Laptop",
                   productId: "P-1",
                   quantity: "1",
+                  rate: 1500,
                   discount: 0,
                   tax: 0,
                   amount: 1500
@@ -18,11 +19,12 @@ class TestFrontgo < Minitest::Test
           ],
           orderSummary: {
               subTotal: "1500.00",
-              totalTax: "1500.00",
+              totalTax: "0.00",
               totalDiscount: "0.00",
+              shippingCost: "0.00",
               grandTotal: "1500.00"
           },
-          orderDate: "2 Aug, 2023",
+          orderDate: "02 Aug, 2023",
           dueDateForPaymentLink: "1691125906",
           sendOrderBy: {
               sms: false,
@@ -35,10 +37,10 @@ class TestFrontgo < Minitest::Test
               type: "private",
               countryCode: "+47",
               msisdn: "46567468",
-              email: "[email protected]",
+              email: "kari.nordmann@example.com",
               name: "Kari Nordmann",
               preferredLanguage: "en",
-              personalNumber: nil,
+              personalNumber: "12345678901",
               organizationId: nil,
               address: {
                   street: "Luramyrveien 65",
@@ -61,6 +63,17 @@ class TestFrontgo < Minitest::Test
               failure: "https://www.frontpayment.no/failure"
           }
       })
+
+      # Verify successful response
+      assert_equal 201, response["status_code"]
+      assert_equal "OK", response["status_message"]
+      assert_equal "Order Submitted Successfully", response["message"]
+      assert_equal true, response["is_data"]
+
+      # Verify UUID formats
+      assert_match /^ODR\d+$/, data["orderUuid"]
+      assert_match /^CSRT\d+$/, data["customerUuid"]
+      assert_match /^https:\/\//, data["paymentUrl"]
     end
   end
 

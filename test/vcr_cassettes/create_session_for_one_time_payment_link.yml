@@ -5,9 +5,9 @@ http_interactions:
     uri: https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit
     body:
       encoding: UTF-8
-      string: '{"products":[{"name":"Router","productId":"P-1","quantity":"1","discount":0,"tax":0,"amount":1500}],"orderSummary":{"subTotal":"1500.00","totalTax":"1500.00","totalDiscount":"0.00","grandTotal":"1500.00"},"orderDate":"2
-        Aug, 2023","dueDateForPaymentLink":"1691125906","sendOrderBy":{"sms":false,"email":false,"invoice":true},"invoiceAsPaymentOption":true,"isCreditCheckAvailable":false,"customerDetails":{"type":"private","countryCode":"+47","msisdn":"46567468","email":"[email
-        protected]","name":"Kari Nordmann","preferredLanguage":"en","personalNumber":null,"organizationId":null,"address":{"street":"Luramyrveien
+      string: '{"products":[{"name":"Framework 13 Laptop","productId":"P-1","quantity":"1","rate":1500,"discount":0,"tax":0,"amount":1500}],"orderSummary":{"subTotal":"1500.00","totalTax":"0.00","totalDiscount":"0.00","shippingCost":"0.00","grandTotal":"1500.00"},"orderDate":"02
+        Aug, 2023","dueDateForPaymentLink":"1691125906","sendOrderBy":{"sms":false,"email":false,"invoice":true},"invoiceAsPaymentOption":true,"isCreditCheckAvailable":false,"customerDetails":{"type":"private","countryCode":"+47","msisdn":"46567468","email":"kari.nordmann@example.com","name":"Kari
+        Nordmann","preferredLanguage":"en","personalNumber":"12345678901","organizationId":null,"address":{"street":"Luramyrveien
         65","zip":"4313","city":"Sandnes","country":"NO"}},"invoiceReferences":null,"internalReferences":null,"invoiceInterval":0,"separateInvoices":true,"submitPayment":{"via":"invoice","currency":"NOK"},"callback":{"callbackUrl":"https://www.frontpayment.no/callback","success":"https://www.frontpayment.no/success","failure":"https://www.frontpayment.no/failure"}}'
     headers:
       Authorization:
@@ -18,8 +18,8 @@ http_interactions:
       - application/json
   response:
     status:
-      code: 417
-      message: Expectation Failed
+      code: 201
+      message: Created
     headers:
       server:
       - nginx/1.24.0 (Ubuntu)
@@ -32,19 +32,16 @@ http_interactions:
       cache-control:
       - no-cache, private
       date:
-      - Tue, 22 Jul 2025 22:01:11 GMT
+      - Mon, 28 Jul 2025 21:42:11 GMT
       x-ratelimit-limit:
       - '240'
       x-ratelimit-remaining:
-      - '239'
+      - '238'
       access-control-allow-origin:
       - "*"
     body:
       encoding: UTF-8
-      string: '{"status_code":417,"status_message":"Client Error","message":"payloadValidationErrors","is_error":true,"errors":["The
-        order summary.shipping cost field is required.","The order date does not match
-        the format d M, Y.","The customer details.email must be a valid email address.","The
-        customer details.personal number field is required when submit payment.via
-        is invoice.","The products.0.rate field is required."]}'
-  recorded_at: Tue, 22 Jul 2025 22:01:11 GMT
+      string: '{"status_code":201,"status_message":"OK","message":"Order Submitted
+        Successfully","is_data":true,"data":{"orderUuid":"ODR1649249709","customerUuid":"CSRT3774619516","paymentUrl":"https:\/\/auth.current.bankid.no\/auth\/realms\/current\/precheck\/auth?client_id=front_payment-bankid-current&redirect_uri=https%3A%2F%2Fdemo.frontpayment.no%2Forder%2Fhandle-bankid-verification&response_type=code&scope=openid+profile+nnin&state=eyJvcmRlclV1aWQiOiJPRFIxNjQ5MjQ5NzA5IiwiY29ubmVjdCI6InllcyJ9&code_verifier=G2stUpTWHiWMJEeFaH1IJkiCD23BOqCi8tF6cPSE1d8"}}'
+  recorded_at: Mon, 28 Jul 2025 21:42:11 GMT
 recorded_with: VCR 6.3.1
