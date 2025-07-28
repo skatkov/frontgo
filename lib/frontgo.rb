@@ -2,10 +2,10 @@
 
 require_relative "frontgo/version"
 require_relative "frontgo/connection"
-require_relative "frontgo/orders"
-require_relative "frontgo/reservations"
+require_relative "frontgo/order"
+require_relative "frontgo/reservation"
 require_relative "frontgo/subscription"
-require_relative "frontgo/customers"
+require_relative "frontgo/customer"
 require_relative "frontgo/refund"
 require_relative "frontgo/terminal"
 require_relative "frontgo/credit"
@@ -17,10 +17,10 @@ module Frontgo
 
   class Client
     include Connection
-    include Orders
-    include Reservations
+    include Order
+    include Reservation
     include Subscription
-    include Customers
+    include Customer
     include Refund
     include Terminal
     include Credit

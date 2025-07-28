@@ -2,7 +2,7 @@
 
 module Frontgo
   # @see https://docs.frontpayment.no/books/fpgo-connect/chapter/customer-management
-  module Customers
+  module Customer
     # @example Get customer details
     #   client.get_customer_details_by_uuid("CSRT1511414842")
     def get_customer_details_by_uuid(uuid)

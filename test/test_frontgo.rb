@@ -70,7 +70,7 @@ class TestFrontgo < Minitest::Test
       assert_equal "Order Submitted Successfully", response["message"]
       assert_equal true, response["is_data"]
 
-      # Verify UUID formats
+      data = response["data"]
       assert_match /^ODR\d+$/, data["orderUuid"]
       assert_match /^CSRT\d+$/, data["customerUuid"]
       assert_match /^https:\/\//, data["paymentUrl"]

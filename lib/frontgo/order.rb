@@ -2,7 +2,7 @@
 
 module Frontgo
   # @see https://docs.frontpayment.no/books/fpgo-connect/chapter/order-management
-  module Orders
+  module Order
     # @example Create a one-time payment link session
     #   client.create_session_for_one_time_payment_link({
     #     products: [{ name: "Router", rate: 4500, tax: 12, amount: 4500 }],
@@ -54,9 +54,9 @@ module Frontgo
     # @example Send E-Faktura invoice
     #   client.send_e_faktura({
     #     products: { "0": { name: "Hair Wash", rate: 51, tax: 0, amount: 51 } },
-    #     customerDetails: { 
-    #       type: "private", 
-    #       name: "Kari Nordmann", 
+    #     customerDetails: {
+    #       type: "private",
+    #       name: "Kari Nordmann",
     #       email: "kari@example.com",
     #       personalNumber: "12345678901"
     #     },
@@ -69,9 +69,9 @@ module Frontgo
     # @example Send EHF invoice for corporate customers
     #   client.send_ehf_invoice({
     #     products: { "0": { name: "Hair Wash", rate: 51, tax: 0, amount: 51 } },
-    #     customerDetails: { 
-    #       type: "corporate", 
-    #       name: "Kari Nordmann", 
+    #     customerDetails: {
+    #       type: "corporate",
+    #       name: "Kari Nordmann",
     #       email: "kari@example.com",
     #       organizationId: "123456789"
     #     },
@@ -82,8 +82,8 @@ module Frontgo
     end
 
     # @example Cancel an order
-    #   client.cancel_order("ODR123456789", { 
-    #     cancellationNote: "Customer requested cancellation" 
+    #   client.cancel_order("ODR123456789", {
+    #     cancellationNote: "Customer requested cancellation"
     #   })
     def cancel_order(order_uuid, params)
       post "api/v1/connect/orders/cancel/#{order_uuid}", params
@@ -92,9 +92,9 @@ module Frontgo
     # @example Send payment link to customer
     #   client.send_payment_link({
     #     products: { "0": { name: "Hair Wash", rate: 51, tax: 0, amount: 51 } },
-    #     customerDetails: { 
-    #       type: "private", 
-    #       name: "Kari Nordmann", 
+    #     customerDetails: {
+    #       type: "private",
+    #       name: "Kari Nordmann",
     #       email: "kari@example.com"
     #     },
     #     sendOrderBy: { sms: true, email: false, invoice: false },
@@ -107,9 +107,9 @@ module Frontgo
     # @example Send regular invoice
     #   client.send_invoice({
     #     products: { "0": { name: "Hair Wash", rate: 51, tax: 0, amount: 51 } },
-    #     customerDetails: { 
-    #       type: "private", 
-    #       name: "Kari Nordmann", 
+    #     customerDetails: {
+    #       type: "private",
+    #       name: "Kari Nordmann",
     #       email: "kari@example.com"
     #     },
     #     sendOrderBy: { sms: false, email: false, invoice: true },

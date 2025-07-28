@@ -2,7 +2,7 @@
 
 module Frontgo
   # @see https://docs.frontpayment.no/books/fpgo-connect/chapter/reservation-management
-  module Reservations
+  module Reservation
     # @example Submit a new reservation
     #   client.submit_reservation({
     #     customerDetails: {
