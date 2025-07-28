@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://demo-api.frontpayment.no/api/v1/connect/orders/status/ODR1649249709
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - "<AUTH>"
+      User-Agent:
+      - Faraday v2.13.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.24.0 (Ubuntu)
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      cache-control:
+      - no-cache, private
+      date:
+      - Mon, 28 Jul 2025 22:19:09 GMT
+      x-ratelimit-limit:
+      - '240'
+      x-ratelimit-remaining:
+      - '238'
+      access-control-allow-origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: '{"status_code":200,"status_message":"OK","message":"Order Status Retrieved
+        Successfully","is_data":true,"data":{"uuid":"ODR1649249709","status":"SENT"}}'
+  recorded_at: Mon, 28 Jul 2025 22:19:09 GMT
+recorded_with: VCR 6.3.1

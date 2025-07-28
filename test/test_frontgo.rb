@@ -77,6 +77,22 @@ class TestFrontgo < Minitest::Test
     end
   end
 
+  def test_get_order_status_by_uuid
+    VCR.use_cassette("get_order_status_by_uuid") do
+      order_uuid = "ODR1649249709"
+
+      response = client.get_order_status_by_uuid(order_uuid)
+
+      assert_equal 200, response["status_code"]
+      assert_equal "OK", response["status_message"]
+      assert_equal true, response["is_data"]
+
+      data = response["data"]
+      assert_equal order_uuid, data["uuid"]
+      assert_includes ["SENT", "PAID", "CANCELLED", "FAILED", "PROCESSING", "PENDING"], data["status"]
+    end
+  end
+
   private
 
   def client
