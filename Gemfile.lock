@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    frontgo (0.1.0)
+    frontgo (0.1.1)
       faraday
 
 GEM
