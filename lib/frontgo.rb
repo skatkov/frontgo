@@ -9,8 +9,7 @@ require_relative "frontgo/customer"
 require_relative "frontgo/refund"
 require_relative "frontgo/terminal"
 require_relative "frontgo/credit"
-require 'faraday'
-
+require "faraday"
 
 module Frontgo
   class Error < StandardError; end
@@ -27,7 +26,7 @@ module Frontgo
 
     def initialize(base_url, key:)
       @connection = Faraday.new(base_url) do |conn|
-        conn.headers['Authorization'] = "Bearer #{key}"
+        conn.headers["Authorization"] = "Bearer #{key}"
         conn.request :json
         conn.response :json
         conn.response :raise_error

@@ -5,17 +5,17 @@ require "frontgo"
 
 require "minitest/autorun"
 
-require 'vcr'
+require "vcr"
 
 VCR.configure do |c|
-  c.cassette_library_dir = 'test/vcr_cassettes'
+  c.cassette_library_dir = "test/vcr_cassettes"
   c.hook_into :faraday, :webmock
 
   c.default_cassette_options = {
     allow_unused_http_interactions: false
   }
 
-  if ENV["CI"] != nil
+  if !ENV["CI"].nil?
     c.default_cassette_options[:record] = :none
   end
 

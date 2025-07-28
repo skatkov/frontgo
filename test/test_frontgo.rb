@@ -6,62 +6,62 @@ class TestFrontgo < Minitest::Test
   def test_create_session_for_one_time_payment_link
     VCR.use_cassette("create_session_for_one_time_payment_link") do
       response = client.create_session_for_one_time_payment_link({
-          products: [
-              {
-                  name: "Framework 13 Laptop",
-                  productId: "P-1",
-                  quantity: "1",
-                  rate: 1500,
-                  discount: 0,
-                  tax: 0,
-                  amount: 1500
-              }
-          ],
-          orderSummary: {
-              subTotal: "1500.00",
-              totalTax: "0.00",
-              totalDiscount: "0.00",
-              shippingCost: "0.00",
-              grandTotal: "1500.00"
-          },
-          orderDate: "02 Aug, 2023",
-          dueDateForPaymentLink: "1691125906",
-          sendOrderBy: {
-              sms: false,
-              email: false,
-              invoice: true
-          },
-          invoiceAsPaymentOption: true,
-          isCreditCheckAvailable: false,
-          customerDetails: {
-              type: "private",
-              countryCode: "+47",
-              msisdn: "46567468",
-              email: "kari.nordmann@example.com",
-              name: "Kari Nordmann",
-              preferredLanguage: "en",
-              personalNumber: "12345678901",
-              organizationId: nil,
-              address: {
-                  street: "Luramyrveien 65",
-                  zip: "4313",
-                  city: "Sandnes",
-                  country: "NO"
-              }
-          },
-          invoiceReferences: nil,
-          internalReferences: nil,
-          invoiceInterval: 0,
-          separateInvoices: true,
-          submitPayment: {
-              via: "invoice",
-              currency: "NOK"
-          },
-          callback: {
-              callbackUrl: "https://www.frontpayment.no/callback",
-              success: "https://www.frontpayment.no/success",
-              failure: "https://www.frontpayment.no/failure"
+        products: [
+          {
+            name: "Framework 13 Laptop",
+            productId: "P-1",
+            quantity: "1",
+            rate: 1500,
+            discount: 0,
+            tax: 0,
+            amount: 1500
           }
+        ],
+        orderSummary: {
+          subTotal: "1500.00",
+          totalTax: "0.00",
+          totalDiscount: "0.00",
+          shippingCost: "0.00",
+          grandTotal: "1500.00"
+        },
+        orderDate: "02 Aug, 2023",
+        dueDateForPaymentLink: "1691125906",
+        sendOrderBy: {
+          sms: false,
+          email: false,
+          invoice: true
+        },
+        invoiceAsPaymentOption: true,
+        isCreditCheckAvailable: false,
+        customerDetails: {
+          type: "private",
+          countryCode: "+47",
+          msisdn: "46567468",
+          email: "kari.nordmann@example.com",
+          name: "Kari Nordmann",
+          preferredLanguage: "en",
+          personalNumber: "12345678901",
+          organizationId: nil,
+          address: {
+            street: "Luramyrveien 65",
+            zip: "4313",
+            city: "Sandnes",
+            country: "NO"
+          }
+        },
+        invoiceReferences: nil,
+        internalReferences: nil,
+        invoiceInterval: 0,
+        separateInvoices: true,
+        submitPayment: {
+          via: "invoice",
+          currency: "NOK"
+        },
+        callback: {
+          callbackUrl: "https://www.frontpayment.no/callback",
+          success: "https://www.frontpayment.no/success",
+          failure: "https://www.frontpayment.no/failure"
+        }
       })
 
       # Verify successful response
@@ -71,9 +71,9 @@ class TestFrontgo < Minitest::Test
       assert_equal true, response["is_data"]
 
       data = response["data"]
-      assert_match /^ODR\d+$/, data["orderUuid"]
-      assert_match /^CSRT\d+$/, data["customerUuid"]
-      assert_match /^https:\/\//, data["paymentUrl"]
+      assert_match(/^ODR\d+$/, data["orderUuid"])
+      assert_match(/^CSRT\d+$/, data["customerUuid"])
+      assert_match(/^https:\/\//, data["paymentUrl"])
     end
   end
 
@@ -81,7 +81,7 @@ class TestFrontgo < Minitest::Test
 
   def client
     @client ||= Frontgo::Client.new(
-      "https://demo-api.frontpayment.no/", key: (ENV['FRONTGO_API_KEY'] || 'key')
+      "https://demo-api.frontpayment.no/", key: ENV["FRONTGO_API_KEY"] || "key"
     )
   end
 end
