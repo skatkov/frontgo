@@ -5,10 +5,10 @@ http_interactions:
     uri: https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit
     body:
       encoding: UTF-8
-      string: '{"products":[{"name":"Router","productId":"R_1","quantity":"1","rate":4500,"discount":0,"tax":"12","amount":4500}],"orderSummary":{"subTotal":"4017.86","totalTax":"482.14","totalDiscount":"0.00","grandTotal":"4500.00"},"orderDate":"2
+      string: '{"products":[{"name":"Router","productId":"P-1","quantity":"1","discount":0,"tax":0,"amount":1500}],"orderSummary":{"subTotal":"1500.00","totalTax":"1500.00","totalDiscount":"0.00","grandTotal":"1500.00"},"orderDate":"2
         Aug, 2023","dueDateForPaymentLink":"1691125906","sendOrderBy":{"sms":false,"email":false,"invoice":true},"invoiceAsPaymentOption":true,"isCreditCheckAvailable":false,"customerDetails":{"type":"private","countryCode":"+47","msisdn":"46567468","email":"[email
         protected]","name":"Kari Nordmann","preferredLanguage":"en","personalNumber":null,"organizationId":null,"address":{"street":"Luramyrveien
-        65","zip":"4313","city":"Sandnes","country":"NO"}},"invoiceReferences":null,"internalReferences":null,"invoiceInterval":0,"separateInvoices":true,"submitPayment":{"via":"invoice","currency":"NOK"},"callback":{"success":"https://www.frontpayment.no/success","failure":"https://www.frontpayment.no/failure"}}'
+        65","zip":"4313","city":"Sandnes","country":"NO"}},"invoiceReferences":null,"internalReferences":null,"invoiceInterval":0,"separateInvoices":true,"submitPayment":{"via":"invoice","currency":"NOK"},"callback":{"callbackUrl":"https://www.frontpayment.no/callback","success":"https://www.frontpayment.no/success","failure":"https://www.frontpayment.no/failure"}}'
     headers:
       Authorization:
       - "<AUTH>"
@@ -32,11 +32,11 @@ http_interactions:
       cache-control:
       - no-cache, private
       date:
-      - Tue, 15 Jul 2025 19:42:30 GMT
+      - Tue, 22 Jul 2025 22:01:11 GMT
       x-ratelimit-limit:
       - '240'
       x-ratelimit-remaining:
-      - '230'
+      - '239'
       access-control-allow-origin:
       - "*"
     body:
@@ -45,6 +45,6 @@ http_interactions:
         order summary.shipping cost field is required.","The order date does not match
         the format d M, Y.","The customer details.email must be a valid email address.","The
         customer details.personal number field is required when submit payment.via
-        is invoice."]}'
-  recorded_at: Tue, 15 Jul 2025 19:42:30 GMT
+        is invoice.","The products.0.rate field is required."]}'
+  recorded_at: Tue, 22 Jul 2025 22:01:11 GMT
 recorded_with: VCR 6.3.1

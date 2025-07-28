@@ -9,6 +9,7 @@ require_relative "frontgo/customers"
 require_relative "frontgo/refund"
 require_relative "frontgo/terminal"
 require_relative "frontgo/credit"
+require 'faraday'
 
 
 module Frontgo
@@ -28,8 +29,8 @@ module Frontgo
       @connection = Faraday.new(base_url) do |conn|
         conn.headers['Authorization'] = "Bearer #{key}"
         conn.request :json
-        conn.response :raise_error
         conn.response :json
+        conn.response :raise_error
       end
     end
   end
