@@ -26,7 +26,7 @@ module Frontgo
     #     reference: "CHA3852658817"
     #   })
     def request_refund_approval(order_uuid, params)
-      post "api/v1/orders/refund/request/approval/#{order_uuid}", params
+      post "orders/refund/request/approval/#{order_uuid}", params
     end
   end
 end

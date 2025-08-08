@@ -16,7 +16,7 @@ And then install
 ## Usage
 
 ```ruby
-client = Frontgo::Client.new('https://api.frontpayment.no', key: 'your-api-key')
+client = Frontgo::Client.new(key: 'your-api-key') # add demo: true to make calls to non-production instance.
 
 # Create payment session
 client.create_session_for_one_time_payment_link({
