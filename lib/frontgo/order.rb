@@ -12,7 +12,7 @@ module Frontgo
     #     callback: { success: "https://example.com/success", failure: "https://example.com/failure" }
     #   })
     def create_session_for_one_time_payment_link(params)
-      post "api/v1/connect/orders/regular/submit", params
+      post "connect/orders/regular/submit", params
     end
 
     # @example Create an invoice order session
@@ -25,7 +25,7 @@ module Frontgo
     #     separateInvoices: true
     #   })
     def create_session_for_invoice_order(params)
-      post "api/v1/connect/orders/regular/submit", params
+      post "connect/orders/regular/submit", params
     end
 
     # Can be filtered by status type as query (?type=)
@@ -36,19 +36,19 @@ module Frontgo
     # @example Get only invoiced orders
     #   client.get_all_order_status(type: 'invoiced')
     def get_all_order_status(params = {})
-      get "api/v1/connect/orders/status", params
+      get "connect/orders/status", params
     end
 
     # @example Get order status by UUID
     #   client.get_order_status_by_uuid("ODR347888404")
     def get_order_status_by_uuid(uuid)
-      get "api/v1/connect/orders/status/#{uuid}"
+      get "connect/orders/status/#{uuid}"
     end
 
     # @example Get detailed order information
     #   client.get_order_details_by_uuid("ODR986760186")
     def get_order_details_by_uuid(uuid)
-      get "api/v1/connect/orders/details/#{uuid}"
+      get "connect/orders/details/#{uuid}"
     end
 
     # @example Send E-Faktura invoice
@@ -63,7 +63,7 @@ module Frontgo
     #     orderSummary: { subTotal: 51.00, totalTax: 0.00, grandTotal: 51.00 }
     #   })
     def send_e_faktura(params)
-      post "api/v1/connect/orders/invoice/create/faktura", params
+      post "connect/orders/invoice/create/faktura", params
     end
 
     # @example Send EHF invoice for corporate customers
@@ -78,7 +78,7 @@ module Frontgo
     #     orderSummary: { subTotal: 51.00, totalTax: 0.00, grandTotal: 51.00 }
     #   })
     def send_ehf_invoice(params)
-      post "api/v1/connect/orders/invoice/create/ehf", params
+      post "connect/orders/invoice/create/ehf", params
     end
 
     # @example Cancel an order
@@ -86,7 +86,7 @@ module Frontgo
     #     cancellationNote: "Customer requested cancellation"
     #   })
     def cancel_order(order_uuid, params)
-      post "api/v1/connect/orders/cancel/#{order_uuid}", params
+      post "connect/orders/cancel/#{order_uuid}", params
     end
 
     # @example Send payment link to customer
@@ -101,7 +101,7 @@ module Frontgo
     #     orderSummary: { subTotal: 51.00, totalTax: 0.00, grandTotal: 51.00 }
     #   })
     def send_payment_link(params)
-      post "api/v1/connect/orders/payment-link/create", params
+      post "connect/orders/payment-link/create", params
     end
 
     # @example Send regular invoice
@@ -117,7 +117,7 @@ module Frontgo
     #     separateInvoices: true
     #   })
     def send_invoice(params)
-      post "api/v1/connect/orders/invoice/create", params
+      post "connect/orders/invoice/create", params
     end
 
     # @example Resend payment link to customer
@@ -127,7 +127,7 @@ module Frontgo
     #     email: "customer@example.com"
     #   })
     def resend_payment_link(uuid, params)
-      post "api/v1/connect/orders/resend/#{uuid}", params
+      post "connect/orders/resend/#{uuid}", params
     end
 
     # @example Refund an order (full or partial)
@@ -140,13 +140,13 @@ module Frontgo
     #     ]
     #   })
     def refund_order(uuid, params)
-      post "api/v1/connect/orders/refund/#{uuid}", params
+      post "connect/orders/refund/#{uuid}", params
     end
 
     # @example Get invoice number for an order
     #   client.get_invoice_number_by_uuid("ODR2005869234")
     def get_invoice_number_by_uuid(uuid)
-      get "api/v1/connect/orders/invoice-number/#{uuid}"
+      get "connect/orders/invoice-number/#{uuid}"
     end
   end
 end

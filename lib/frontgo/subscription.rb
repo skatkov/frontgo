@@ -11,7 +11,7 @@ module Frontgo
     #     customerDetails: { name: "John Doe", email: "john@example.com" }
     #   })
     def create_subscription(params)
-      post "api/v1/connect/subscription/submit", params
+      post "connect/subscription/submit", params
     end
 
     # @example Create subscription session for checkout
@@ -22,7 +22,7 @@ module Frontgo
     #     callback: { success: "https://example.com/success", failure: "https://example.com/failure" }
     #   })
     def create_session_for_subscription_payment(params)
-      post "api/v1/connect/subscription/create", params
+      post "connect/subscription/create", params
     end
 
     # @example Get all subscriptions
@@ -32,7 +32,7 @@ module Frontgo
     # @example Filter by phone and date range
     #   client.get_subscription_list(nil, { phone: '+47123456789', startDate: '2023-01-01', endDate: '2023-12-31' })
     def get_subscription_list(status = nil, params = {})
-      endpoint = status ? "api/v1/connect/subscriptions/list/#{status}" : "api/v1/connect/subscriptions/list"
+      endpoint = status ? "connect/subscriptions/list/#{status}" : "connect/subscriptions/list"
       get endpoint, params
     end
 
@@ -43,20 +43,20 @@ module Frontgo
     # @example Filter by subscription UUID
     #   client.get_failed_payment_list(nil, { subscriptionUuid: 'SUB123456789' })
     def get_failed_payment_list(status = nil, params = {})
-      endpoint = status ? "api/v1/connect/subscriptions/failed/list/#{status}" : "api/v1/connect/subscriptions/failed/list"
+      endpoint = status ? "connect/subscriptions/failed/list/#{status}" : "connect/subscriptions/failed/list"
       get endpoint, params
     end
 
     # @example Get subscription details
     #   client.get_subscription_details_by_uuid('SUB123456789')
     def get_subscription_details_by_uuid(uuid)
-      get "api/v1/connect/subscriptions/details/#{uuid}"
+      get "connect/subscriptions/details/#{uuid}"
     end
 
     # @example Get failed payment details
     #   client.get_failed_payment_details('ODR123456789')
     def get_failed_payment_details(order_uuid)
-      get "api/v1/connect/subscriptions/failed/details/#{order_uuid}"
+      get "connect/subscriptions/failed/details/#{order_uuid}"
     end
 
     # @example Resend subscription payment link
@@ -67,13 +67,13 @@ module Frontgo
     #     email: 'customer@example.com'
     #   })
     def resend_subscription(uuid, params)
-      post "api/v1/connect/subscriptions/resend/#{uuid}", params
+      post "connect/subscriptions/resend/#{uuid}", params
     end
 
     # @example Cancel subscription
     #   client.cancel_subscription('SUB123456789', { note: 'Customer requested cancellation' })
     def cancel_subscription(uuid, params)
-      post "api/v1/connect/subscriptions/cancel/#{uuid}", params
+      post "connect/subscriptions/cancel/#{uuid}", params
     end
 
     # @example Refund specific subscription cycles
@@ -82,7 +82,7 @@ module Frontgo
     #     amount: 200.00
     #   })
     def refund_subscription_cycle(uuid, params)
-      post "api/v1/connect/subscriptions/cycles/refund/#{uuid}", params
+      post "connect/subscriptions/cycles/refund/#{uuid}", params
     end
   end
 end

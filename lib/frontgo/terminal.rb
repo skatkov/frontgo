@@ -6,7 +6,7 @@ module Frontgo
     # @example Get terminal lists for organization
     #   client.get_terminal_lists("ORG2074299506")
     def get_terminal_lists(organization_uuid)
-      get "api/v1/connect/terminal/lists/#{organization_uuid}"
+      get "connect/terminal/lists/#{organization_uuid}"
     end
 
     # @example Create terminal order with callback
@@ -29,25 +29,25 @@ module Frontgo
     #     callbackUrl: "https://example-callback.com"
     #   })
     def create_terminal_order(params)
-      post "api/v1/connect/terminal/orders/create", params
+      post "connect/terminal/orders/create", params
     end
 
     # @example Cancel terminal order payment
     #   client.cancel_terminal_order("ODR123456789", { type: "payment" })
     def cancel_terminal_order(order_uuid, params)
-      post "api/v1/connect/terminal/orders/cancel/#{order_uuid}", params
+      post "connect/terminal/orders/cancel/#{order_uuid}", params
     end
 
     # @example Resend terminal order to terminal
     #   client.resend_terminal_order("ODR123456789")
     def resend_terminal_order(order_uuid)
-      post "api/v1/connect/terminal/orders/resend/#{order_uuid}", {}
+      post "connect/terminal/orders/resend/#{order_uuid}", {}
     end
 
     # @example Check payment status
     #   client.get_payment_status("ODR123456789")
     def get_payment_status(order_uuid)
-      get "api/v1/connect/terminal/orders/payment-status/#{order_uuid}"
+      get "connect/terminal/orders/payment-status/#{order_uuid}"
     end
 
     # @example Refund terminal order
@@ -65,19 +65,19 @@ module Frontgo
     #     isReversal: true
     #   })
     def refund_terminal_order(order_uuid, params)
-      post "api/v1/connect/terminal/orders/refund/#{order_uuid}", params
+      post "connect/terminal/orders/refund/#{order_uuid}", params
     end
 
     # @example Check refund status
     #   client.get_refund_status("ODR123456789")
     def get_refund_status(order_uuid)
-      get "api/v1/connect/terminal/orders/refund-status/#{order_uuid}"
+      get "connect/terminal/orders/refund-status/#{order_uuid}"
     end
 
     # @example Cancel refund request
     #   client.cancel_refund_request("ODR123456789", { type: "refund" })
     def cancel_refund_request(order_uuid, params)
-      post "api/v1/connect/terminal/orders/cancel/#{order_uuid}", params
+      post "connect/terminal/orders/cancel/#{order_uuid}", params
     end
   end
 end

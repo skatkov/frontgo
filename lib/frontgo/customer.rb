@@ -6,7 +6,7 @@ module Frontgo
     # @example Get customer details
     #   client.get_customer_details_by_uuid("CSRT1511414842")
     def get_customer_details_by_uuid(uuid)
-      get "api/v1/connect/customers/details/#{uuid}"
+      get "connect/customers/details/#{uuid}"
     end
 
     # @example Update private customer
@@ -33,7 +33,7 @@ module Frontgo
     #     }
     #   })
     def update_private_customer(uuid, params)
-      put "api/v1/connect/customers/update/private/#{uuid}", params
+      put "connect/customers/update/private/#{uuid}", params
     end
 
     # @example Update corporate customer
@@ -70,7 +70,7 @@ module Frontgo
     #     }
     #   })
     def update_corporate_customer(uuid, params)
-      put "api/v1/connect/customers/update/corporate/#{uuid}", params
+      put "connect/customers/update/corporate/#{uuid}", params
     end
   end
 end

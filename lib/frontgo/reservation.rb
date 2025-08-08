@@ -18,13 +18,13 @@ module Frontgo
     #     settings: { isChargePartiallyRefundable: true }
     #   })
     def submit_reservation(params)
-      post "api/v1/connect/reservations/submit", params
+      post "connect/reservations/submit", params
     end
 
     # @example Get reservation details by UUID
     #   client.get_reservation_details_by_uuid("RES3633019929")
     def get_reservation_details_by_uuid(uuid)
-      get "api/v1/connect/reservations/details/#{uuid}"
+      get "connect/reservations/details/#{uuid}"
     end
 
     # @example Cancel a reservation
@@ -32,7 +32,7 @@ module Frontgo
     #     note: "Customer requested cancellation"
     #   })
     def cancel_reservation(uuid, params)
-      post "api/v1/connect/reservations/cancel/#{uuid}", params
+      post "connect/reservations/cancel/#{uuid}", params
     end
 
     # @example Capture funds from a reservation
@@ -45,7 +45,7 @@ module Frontgo
     #     additionalText: "Capture for services rendered"
     #   })
     def capture_reservation(uuid, params)
-      post "api/v1/connect/reservations/capture/#{uuid}", params
+      post "connect/reservations/capture/#{uuid}", params
     end
 
     # @example Charge additional amount from reservation
@@ -62,7 +62,7 @@ module Frontgo
     #     additionalText: "Extra service charge"
     #   })
     def charge_reservation(uuid, params)
-      post "api/v1/connect/reservations/charge/#{uuid}", params
+      post "connect/reservations/charge/#{uuid}", params
     end
 
     # @example Complete a reservation
@@ -70,7 +70,7 @@ module Frontgo
     #     note: "Service completed successfully"
     #   })
     def complete_reservation(uuid, params)
-      post "api/v1/connect/reservations/complete/#{uuid}", params
+      post "connect/reservations/complete/#{uuid}", params
     end
 
     # @example Resend reservation payment link
@@ -80,7 +80,7 @@ module Frontgo
     #     email: "customer@example.com"
     #   })
     def resend_reservation(uuid, params)
-      post "api/v1/connect/reservations/resend/#{uuid}", params
+      post "connect/reservations/resend/#{uuid}", params
     end
 
     # @example Refund a reservation (from captured or charged amounts)
@@ -95,7 +95,7 @@ module Frontgo
     #     reference: "CHA3852658817"
     #   })
     def refund_reservation(uuid, params)
-      post "api/v1/connect/reservations/refund/#{uuid}", params
+      post "connect/reservations/refund/#{uuid}", params
     end
 
     # @example Create reservation session for checkout
@@ -116,7 +116,7 @@ module Frontgo
     #     settings: { isChargePartiallyRefundable: true }
     #   })
     def create_session_for_reservation(params)
-      post "api/v1/connect/reservations/create", params
+      post "connect/reservations/create", params
     end
 
     # @example Get reservation history by time frame
@@ -124,7 +124,7 @@ module Frontgo
     # @example Get last 24 hours (when no timestamps provided, defaults to last 24 hours)
     #   client.get_reservation_history_by_time_frame("", "")
     def get_reservation_history_by_time_frame(start_timestamp, end_timestamp)
-      get "api/v1/connect/reservations/history/#{start_timestamp}/#{end_timestamp}"
+      get "connect/reservations/history/#{start_timestamp}/#{end_timestamp}"
     end
   end
 end
