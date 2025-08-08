@@ -7,8 +7,7 @@ module Frontgo
     end
 
     def get(uri, params = {}, headers: {})
-      response = @connection.get(uri, params, headers)
-      response.body
+      @connection.get(uri, params, headers)
     end
 
     def put(uri, body = {}, headers: {})
@@ -22,8 +21,7 @@ module Frontgo
     private
 
     def request(method, url, body, headers)
-      response = @connection.run_request method, url, body, headers
-      response.body
+      @connection.run_request method, url, body, headers
     end
   end
 end

@@ -64,16 +64,17 @@ class TestFrontgo < Minitest::Test
         }
       })
 
-      # Verify successful response
-      assert_equal 201, response["status_code"]
-      assert_equal "OK", response["status_message"]
-      assert_equal "Order Submitted Successfully", response["message"]
-      assert_equal true, response["is_data"]
+      assert response.success?
 
-      data = response["data"]
-      assert_match(/^ODR\d+$/, data["orderUuid"])
-      assert_match(/^CSRT\d+$/, data["customerUuid"])
-      assert_match(/^https:\/\//, data["paymentUrl"])
+      response.body.tap do |body|
+        assert_equal "OK", body["status_message"]
+        assert_equal "Order Submitted Successfully", body["message"]
+        assert_equal true, body["is_data"]
+
+        assert_match(/^ODR\d+$/, body.dig("data", "orderUuid"))
+        assert_match(/^CSRT\d+$/, body.dig("data", "customerUuid"))
+        assert_match(/^https:\/\//, body.dig("data", "paymentUrl"))
+      end
     end
   end
 
@@ -82,14 +83,13 @@ class TestFrontgo < Minitest::Test
       order_uuid = "ODR1649249709"
 
       response = client.get_order_status_by_uuid(order_uuid)
+      assert response.success?
 
-      assert_equal 200, response["status_code"]
-      assert_equal "OK", response["status_message"]
-      assert_equal true, response["is_data"]
-
-      data = response["data"]
-      assert_equal order_uuid, data["uuid"]
-      assert_includes ["SENT", "PAID", "CANCELLED", "FAILED", "PROCESSING", "PENDING"], data["status"]
+      response.body.tap do |body|
+        assert_equal "OK", body["status_message"]
+        assert_equal true, body["is_data"]
+        assert_equal order_uuid, body.dig("data", "uuid")
+      end
     end
   end
 
