@@ -18,6 +18,10 @@ module Frontgo
       request :delete, uri, nil, headers
     end
 
+    def url_prefix
+      @connection.url_prefix
+    end
+
     private
 
     def request(method, url, body, headers)

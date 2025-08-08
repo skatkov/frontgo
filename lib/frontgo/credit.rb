@@ -14,7 +14,7 @@ module Frontgo
     #     personalId: "ckFXQWJqeFlieE06ZDU3NGJlNTczMGYx"
     #   })
     def credit_check_private(params)
-      post "api/v1/connect/credit/check/private", params
+      post "connect/credit/check/private", params
     end
 
     # @example Credit check for corporate customer
@@ -22,13 +22,13 @@ module Frontgo
     #     organizationId: "998379342"
     #   })
     def credit_check_corporate(params)
-      post "api/v1/connect/credit/check/corporate", params
+      post "connect/credit/check/corporate", params
     end
 
     # @example Get credit check history list
     #   client.get_credit_check_list
     def get_credit_check_list
-      get "api/v1/connect/credit/check/list"
+      get "connect/credit/check/list"
     end
   end
 end
