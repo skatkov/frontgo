@@ -93,11 +93,28 @@ class TestFrontgo < Minitest::Test
     end
   end
 
+  def test_demo_base_url
+    demo_client = Frontgo::Client.new(key: client_key, demo: true)
+    assert_equal "https://demo-api.frontpayment.no/api/v1/", demo_client.url_prefix.to_s
+  end
+
+  def test_production_base_url
+    prod_client = Frontgo::Client.new(key: client_key, demo: false)
+    assert_equal "https://apigo.frontpayment.no/api/v1", prod_client.url_prefix.to_s
+  end
+
+  def test_default_base_url
+    default_client = Frontgo::Client.new(key: client_key)
+    assert_equal "https://apigo.frontpayment.no/api/v1", default_client.url_prefix.to_s
+  end
+
   private
 
   def client
-    @client ||= Frontgo::Client.new(
-      "https://demo-api.frontpayment.no/", key: ENV["FRONTGO_API_KEY"] || "key"
-    )
+    @client ||= Frontgo::Client.new(key: client_key, demo: true)
+  end
+
+  def client_key
+    ENV["FRONTGO_API_KEY"] || "key"
   end
 end
