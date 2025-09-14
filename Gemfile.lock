@@ -3,6 +3,7 @@ PATH
   specs:
     frontgo (0.2.0)
       faraday
+      faraday-retry
 
 GEM
   remote: https://rubygems.org/
@@ -23,6 +24,8 @@ GEM
       logger
     faraday-net_http (3.4.1)
       net-http (>= 0.5.0)
+    faraday-retry (2.3.2)
+      faraday (~> 2.0)
     hashdiff (1.2.0)
     io-console (0.8.1)
     irb (1.15.2)
