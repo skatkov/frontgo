@@ -15,8 +15,7 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_timeout_error
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_timeout
+    stub_submit.to_timeout
 
     assert_raises(Faraday::ConnectionFailed) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -33,21 +32,20 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_server_error_500
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(
-        status: 500,
-        body: JSON.generate({
-          status_code: 500,
-          status_message: "Internal Dependency Error",
-          message: "Internal Error Occurred Please Try Again Later",
-          is_error: true,
-          errors: {
-            happenedAt: "String",
-            internalErrorDetails: "Array"
-          }
-        }),
-        headers: {"Content-Type" => "application/json"}
-      )
+    stub_submit.to_return(
+      status: 500,
+      body: JSON.generate({
+        status_code: 500,
+        status_message: "Internal Dependency Error",
+        message: "Internal Error Occurred Please Try Again Later",
+        is_error: true,
+        errors: {
+          happenedAt: "String",
+          internalErrorDetails: "Array"
+        }
+      }),
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ServerError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -59,18 +57,17 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_server_error_510
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(
-        status: 510,
-        body: JSON.generate({
-          status_code: 510,
-          status_message: "Execution Exception Occurred",
-          message: "Something Went Wrong",
-          is_error: true,
-          errors: "Array"
-        }),
-        headers: {"Content-Type" => "application/json"}
-      )
+    stub_submit.to_return(
+      status: 510,
+      body: JSON.generate({
+        status_code: 510,
+        status_message: "Execution Exception Occurred",
+        message: "Something Went Wrong",
+        is_error: true,
+        errors: "Array"
+      }),
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ServerError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -82,8 +79,11 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_server_error_502
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(status: 502, body: '{"error": "Bad Gateway"}', headers: {"Content-Type" => "application/json"})
+    stub_submit.to_return(
+      status: 502,
+      body: '{"error": "Bad Gateway"}',
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ServerError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -94,8 +94,11 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_server_error_503
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(status: 503, body: '{"error": "Service Unavailable"}', headers: {"Content-Type" => "application/json"})
+    stub_submit.to_return(
+      status: 503,
+      body: '{"error": "Service Unavailable"}',
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ServerError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -106,8 +109,11 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_client_error_400
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(status: 400, body: '{"error": "Bad Request"}', headers: {"Content-Type" => "application/json"})
+    stub_submit.to_return(
+      status: 400,
+      body: '{"error": "Bad Request"}',
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ClientError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -118,8 +124,11 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_client_error_401
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(status: 401, body: '{"error": "Unauthorized"}', headers: {"Content-Type" => "application/json"})
+    stub_submit.to_return(
+      status: 401,
+      body: '{"error": "Unauthorized"}',
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ClientError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -130,8 +139,11 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_client_error_404
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(status: 404, body: '{"error": "Not Found"}', headers: {"Content-Type" => "application/json"})
+    stub_submit.to_return(
+      status: 404,
+      body: '{"error": "Not Found"}',
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ClientError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -142,8 +154,11 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_too_many_requests_error_429
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(status: 429, body: '{"error": "Too Many Requests"}', headers: {"Content-Type" => "application/json"})
+    stub_submit.to_return(
+      status: 429,
+      body: '{"error": "Too Many Requests"}',
+      headers: {"Content-Type" => "application/json"}
+    )
 
     error = assert_raises(Frontgo::ClientError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -154,8 +169,7 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_ssl_error
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_raise(Faraday::SSLError.new("SSL certificate verification failed"))
+    stub_submit.to_raise(Faraday::SSLError.new("SSL certificate verification failed"))
 
     assert_raises(Faraday::SSLError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -163,8 +177,10 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   def test_create_session_raises_exception_on_parsing_error
-    stub_request(:post, "https://demo-api.frontpayment.no/api/v1/connect/orders/regular/submit")
-      .to_return(status: 200, body: "invalid json response", headers: {"Content-Type" => "application/json"})
+    stub_submit.to_return(
+      status: 200, body: "invalid json response",
+      headers: {"Content-Type" => "application/json"}
+    )
 
     assert_raises(Faraday::ParsingError) do
       client.create_session_for_one_time_payment_link(valid_params)
@@ -172,6 +188,10 @@ class TestFrontgoErrorHandling < Minitest::Test
   end
 
   private
+
+  def stub_submit
+    stub_request(:post, "#{client.url_prefix}connect/orders/regular/submit")
+  end
 
   def valid_params
     {

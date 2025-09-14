@@ -4,7 +4,7 @@ require "faraday"
 
 module Frontgo
   class Error < StandardError
-    # @param response [Faraday::response]
+    # @param response [Faraday::Response]
     def self.raise_if_error_response!(response)
       klass = case response.status
       when 400..499
