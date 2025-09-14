@@ -59,9 +59,7 @@ module Frontgo
   module RaiseError
     class Middleware < ::Faraday::Middleware
       def on_complete(env)
-        if env[:status] >= 400
-          Frontgo::Error.raise_if_error_response!(env)
-        end
+        Frontgo::Error.raise_if_error_response!(env)
       end
     end
   end

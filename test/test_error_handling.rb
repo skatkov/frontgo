@@ -173,14 +173,6 @@ class TestFrontgoErrorHandling < Minitest::Test
 
   private
 
-  def client
-    @client ||= Frontgo::Client.new(key: client_key, demo: true)
-  end
-
-  def client_key
-    ENV["FRONTGO_API_KEY"] || "test_key"
-  end
-
   def valid_params
     {
       products: [

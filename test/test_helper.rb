@@ -19,6 +19,14 @@ VCR.configure do |c|
     c.default_cassette_options[:record] = :none
   end
 
+  def client
+    @client ||= Frontgo::Client.new(key: client_key, demo: true)
+  end
+
+  def client_key
+    ENV["FRONTGO_API_KEY"] || "key"
+  end
+
   # Filter out all Authorization headers
   c.filter_sensitive_data("<AUTH>") do |interaction|
     interaction.request.headers["Authorization"]&.first
