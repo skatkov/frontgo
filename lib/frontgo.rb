@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require_relative "frontgo/version"
+
+require_relative "middleware/raise_error"
+
 require_relative "frontgo/connection"
 require_relative "frontgo/order"
 require_relative "frontgo/reservation"
@@ -9,6 +12,9 @@ require_relative "frontgo/customer"
 require_relative "frontgo/refund"
 require_relative "frontgo/terminal"
 require_relative "frontgo/credit"
+
+require_relative "frontgo/error"
+
 require "faraday"
 
 module Frontgo
@@ -37,7 +43,7 @@ module Frontgo
         conn.headers["Authorization"] = "Bearer #{key}"
         conn.request :json
         conn.response :json
-        conn.response :raise_error
+        conn.response :frontgo_raise_error
       end
     end
 
