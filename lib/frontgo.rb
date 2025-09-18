@@ -37,7 +37,6 @@ module Frontgo
         conn.headers["Authorization"] = "Bearer #{key}"
         conn.request :json
         conn.response :json
-        conn.response :raise_error
       end
     end
 
