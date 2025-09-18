@@ -29,8 +29,21 @@ client.create_session_for_one_time_payment_link({
 
 # Get order status
 client.get_order_status_by_uuid("ODR123456789")
-```
 
+# With all the recommended error handling
+begin
+  response = client.get_order_status_by_uuid("ODR123")
+  if response.success?
+    # handle success
+  else
+    # handle non-2xx response
+  end
+rescue Faraday::TimeoutError, Faraday::ConnectionFailed, Faraday::SSLError => e
+  warn "Network error: #{e.class}: #{e.message}"
+rescue Faraday::ParsingError => e
+  warn "Parsing error: #{e.message}"
+end
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
